@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>To Do App!</title>
+  <style>
+    #todo-item {
+      font-weight: 700;
+      font-size: 2em;
+    }
+  </style>
+</head>
+<body>
+  <!-- Title -->
+  <h1>My To Do's!</h1>
+  <!-- Input Form -->
+  <form>
+    <span id="todo-item">To Do Item: <input id="to-do-input" type="text" ><input id="add-to-do" value="Add Item" type="submit"></span>
+  </form>
+  <hr>
+  <!-- To-Do List -->
+  <div id="to-dos"></div>
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Script -->
+  <script>
+        $(document).ready(function () {
+            var stringTodos = localStorage.getItem("todos");
+            var todos = JSON.parse(stringTodos);
+            if(!Array.isArray(todos)){
+                console.log("goo");
+                todos = [];
+            }
+            console.log(todos);
+            loadTodosOnPage();
+            $("#add-to-do").on("click", (e) => {
+                e.preventDefault();
+                let inputTag = $("#to-do-input");
+                let inputText = inputTag.val().trim();
+                todos.push(inputText);
+                localStorage.setItem("todos", JSON.stringify(todos));
+                loadTodosOnPage();
+                inputTag.val("");
+            })
+            $(document.body).on("click", ".delete" , function(e) {
+                let stringIndex = $(this).attr("data-index");
+                let index = parseInt(stringIndex);
+                todos.splice(index, 1);
+                localStorage.setItem("todos", JSON.stringify(todos));
+                loadTodosOnPage();
+            })
+            function loadTodosOnPage() {
+                let anchorDiv = $("#to-dos");
+                anchorDiv.empty();
+                for(let i = 0; i < todos.length; i++) {
+                    let currentTodo = todos[i];
+                    let p = $("<p>" + currentTodo + "</p>" )
+                    let b = $("<button class='delete' >X</button>");
+                    b.attr("data-index", i);
+                    p.prepend(b);
+                    anchorDiv.prepend(p);
+                }
+            }
+        })
+  </script>
+</body>
+</html>
