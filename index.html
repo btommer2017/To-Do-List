@@ -8,14 +8,35 @@
       font-weight: 700;
       font-size: 2em;
     }
+    .ListHeader {
+        text-align: center;
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+    #add-to-do {
+        width: 20%;
+        margin-left: 40%;
+        margin-right: 40%;
+    }
+    #to-do-input {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    p {
+        margin-left: .5%;
+    }
+    .delete {
+        margin-right: 1.5%;
+    }
   </style>
 </head>
 <body>
   <!-- Title -->
-  <h1>To Do List</h1>
+  <h1 class="ListHeader">To Do List</h1>
   <!-- Input Form -->
   <form>
-    <span id="todo-item">To Do Item: <input id="to-do-input" type="text" ><input id="add-to-do" value="Add Item" type="submit"></span>
+    <span id="todo-item"><input id="to-do-input" type="text" ><input id="add-to-do" value="Add Item" type="submit"></span>
   </form>
   <hr>
   <!-- To-Do List -->
